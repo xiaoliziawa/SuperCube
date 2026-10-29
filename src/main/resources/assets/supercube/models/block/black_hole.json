@@ -1,0 +1,7 @@
+{
+  "parent": "supercube:block/hypercube",
+  "textures": {
+    "trim": "minecraft:block/gold_block",
+    "core": "minecraft:block/magma"
+  }
+}

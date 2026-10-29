@@ -1,0 +1,7 @@
+{
+  "parent": "supercube:block/hypercube",
+  "textures": {
+    "trim": "minecraft:block/amethyst_block",
+    "core": "minecraft:block/sea_lantern"
+  }
+}
