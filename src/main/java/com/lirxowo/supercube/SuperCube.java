@@ -1,6 +1,7 @@
 package com.lirxowo.supercube;
 
 import com.lirxowo.supercube.config.BlackHoleConfig;
+import com.lirxowo.supercube.config.GlassCubeConfig;
 import com.lirxowo.supercube.config.HypercubeConfig;
 import com.lirxowo.supercube.config.NeonwaveConfig;
 import com.lirxowo.supercube.config.RubikCubeConfig;
@@ -23,6 +24,7 @@ public class SuperCube {
         container.registerConfig(ModConfig.Type.CLIENT, BlackHoleConfig.SPEC, "supercube-black-hole-client.toml");
         container.registerConfig(ModConfig.Type.CLIENT, RubikCubeConfig.SPEC, "supercube-rubik-cube-client.toml");
         container.registerConfig(ModConfig.Type.CLIENT, NeonwaveConfig.SPEC, "supercube-neonwave-client.toml");
+        container.registerConfig(ModConfig.Type.CLIENT, GlassCubeConfig.SPEC, "supercube-glass-cube-client.toml");
     }
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {

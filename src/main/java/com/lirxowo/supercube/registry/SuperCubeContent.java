@@ -51,6 +51,12 @@ public final class SuperCubeContent {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ProjectorBlockEntity>> NEONWAVE_BLOCK_ENTITY = BLOCK_ENTITIES.register(
             "neonwave", () -> new BlockEntityType<>((pos, state) -> new ProjectorBlockEntity(
                     SuperCubeContent.NEONWAVE_BLOCK_ENTITY.get(), pos, state), NEONWAVE.get()));
+    public static final DeferredBlock<ProjectorBlock> GLASS_CUBE = registerProjector(
+            "glass_cube", () -> SuperCubeContent.GLASS_CUBE_BLOCK_ENTITY.get());
+    public static final DeferredItem<BlockItem> GLASS_CUBE_ITEM = ITEMS.registerSimpleBlockItem(GLASS_CUBE);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ProjectorBlockEntity>> GLASS_CUBE_BLOCK_ENTITY = BLOCK_ENTITIES.register(
+            "glass_cube", () -> new BlockEntityType<>((pos, state) -> new ProjectorBlockEntity(
+                    SuperCubeContent.GLASS_CUBE_BLOCK_ENTITY.get(), pos, state), GLASS_CUBE.get()));
     public static final DeferredHolder<MenuType<?>, MenuType<ProjectionMenu>> PROJECTION_MENU = MENUS.register(
             "hypercube", () -> IMenuTypeExtension.create(ProjectionMenu::new));
 
@@ -73,6 +79,7 @@ public final class SuperCubeContent {
             event.accept(BLACK_HOLE_ITEM.get());
             event.accept(RUBIK_CUBE_ITEM.get());
             event.accept(NEONWAVE_ITEM.get());
+            event.accept(GLASS_CUBE_ITEM.get());
         }
     }
 }

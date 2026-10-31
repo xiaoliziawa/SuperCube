@@ -25,6 +25,16 @@ The black hole projects a three-dimensional accretion disk with gravitational le
 
 The two supplied PNG files are included unchanged as `textures/effect/black_hole_noise.png` and `textures/effect/black_hole_stars.png`. They are small previews (239x122 and 239x124); reproducing the original's full detail requires the original channel textures. See [shader credits](SHADER_CREDITS.md).
 
+Find **Glass Cube Projector** in the same creative tab, or use:
+
+```mcfunction
+/give @s supercube:glass_cube
+```
+
+The glass cube projects a rotating, refracting glass block whose layered inner surfaces fade into each other. It is adapted from "Self" by Danil (https://www.shadertoy.com/view/NslGRN) and shows only the cube: the source's sky, floor plane and floor shadow are removed, so the projection draws nothing outside the cube silhouette and the glass reflects a plain gradient. The source scene is z-up; rays are rotated into that space and spun around the vertical axis, and the box intersection supplies the written depth. The scene also runs in the OIT alpha-only passes, which share the box intersection through `glass_cube_bounds.glsl`. See [shader credits](SHADER_CREDITS.md).
+
+Walking inside the cube keeps the same layered, colored surfaces and glass shading seen from outside. Interior rays start at the player's position in the shared scene, with no separate lattice room or glowing core; the depth written is the far wall, so the world behind stays hidden while you are enclosed.
+
 Centered, rotated-grid pixel samples replace the screen-seeded random offsets. Ray steps are deterministic, and each segment is clipped to the thin disk before integrating its density with up to eight midpoint samples. This reduces grain and missed disk intersections without applying a screen-space blur or changing the supplied textures. Inside the projection, the renderer caps pixel samples at two and density samples at four to bound the cost when the effect fills the screen. Rays entering or crossing the black hole core terminate with the accumulated disk emission; core and empty exterior segments skip disk sampling, and degenerate ray directions terminate safely.
 
 Right-click either pedestal to edit its settings:
@@ -71,6 +81,18 @@ Black hole client settings are in `config/supercube-black-hole-client.toml`:
 | `viewDistance` | `64` | Rendering distance from the projection and beam bounds |
 
 The black hole's proxy uses 24 vertices. Both camera rays and volumetric integration run on the GPU; OIT depth-bounds and transmittance passes skip the volumetric integration. All OIT phases use the ray-sphere intersection depth instead of the proxy cube's depth. Size and offsets reuse the shared projector block entity, settings menu and server-validated update packet.
+
+Glass cube client settings are in `config/supercube-glass-cube-client.toml`:
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `enabled` | `true` | Show glass cube projections |
+| `radius` | `2.0` | Projection boundary radius in blocks, before the size multiplier |
+| `animationSpeed` | `1.0` | Rotation speed; `0` freezes the effect |
+| `opacity` | `1.0` | Projection opacity |
+| `beamEnabled` | `true` | Show the projection beam |
+| `beamOpacity` | `0.24` | Beam opacity, multiplied by projection opacity |
+| `viewDistance` | `64` | Rendering distance from the projection and beam bounds |
 
 ## Rendering API Research
 

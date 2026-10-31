@@ -3,6 +3,8 @@ package com.lirxowo.supercube.client;
 import com.lirxowo.supercube.SuperCube;
 import com.lirxowo.supercube.client.renderer.BlackHoleRenderer;
 import com.lirxowo.supercube.client.renderer.BlackHoleRenderTypes;
+import com.lirxowo.supercube.client.renderer.GlassCubeRenderer;
+import com.lirxowo.supercube.client.renderer.GlassCubeRenderTypes;
 import com.lirxowo.supercube.client.renderer.HypercubeRenderer;
 import com.lirxowo.supercube.client.renderer.HypercubeRenderTypes;
 import com.lirxowo.supercube.client.renderer.NeonwaveRenderer;
@@ -31,6 +33,7 @@ public final class SuperCubeClient {
         event.registerBlockEntityRenderer(SuperCubeContent.BLACK_HOLE_BLOCK_ENTITY.get(), context -> new BlackHoleRenderer());
         event.registerBlockEntityRenderer(SuperCubeContent.RUBIK_CUBE_BLOCK_ENTITY.get(), context -> new RubikCubeRenderer());
         event.registerBlockEntityRenderer(SuperCubeContent.NEONWAVE_BLOCK_ENTITY.get(), context -> new NeonwaveRenderer());
+        event.registerBlockEntityRenderer(SuperCubeContent.GLASS_CUBE_BLOCK_ENTITY.get(), context -> new GlassCubeRenderer());
     }
 
     @SubscribeEvent
@@ -46,5 +49,7 @@ public final class SuperCubeClient {
         event.registerOitPipelineSet(RubikCubeRenderTypes.OIT_PIPELINES);
         event.registerPipeline(NeonwaveRenderTypes.PIPELINE);
         event.registerOitPipelineSet(NeonwaveRenderTypes.OIT_PIPELINES);
+        event.registerPipeline(GlassCubeRenderTypes.PIPELINE);
+        event.registerOitPipelineSet(GlassCubeRenderTypes.OIT_PIPELINES);
     }
 }
